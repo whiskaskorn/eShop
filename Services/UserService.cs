@@ -16,6 +16,29 @@ public static class UserServices
         var users = await db.Users.ToListAsync();
         return Results.Ok(users);
     }
+
+    public static async Task<IResult> GetOne(UserContext db,ClaimsPrincipal currentUser)
+    {
+        var idUserFromTokenString = currentUser.FindFirst("Id")?.Value;
+        if(idUserFromTokenString == null)
+        {
+            return Results.Forbid();
+        }
+        int idUserFromTokenInt = Convert.ToInt32(idUserFromTokenString);
+        var user = await db.Users.FindAsync(idUserFromTokenInt);
+        if(user == null)
+        {
+            return Results.NotFound("Користувач не знайден!");
+        }
+        GetUserDTO dto = new GetUserDTO
+        {
+            Id = user.Id,
+            Username = user.Username,
+            Email = user.Email
+        };
+        return Results.Ok(dto);
+    }
+
     public static async Task<IResult> Registration(RegistrationUserDTO dto, IValidator<RegistrationUserDTO> validator, UserContext db,Password_Hasher _hasher)
     {
         var validationResult = validator.Validate(dto);

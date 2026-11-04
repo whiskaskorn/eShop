@@ -132,3 +132,4 @@ C:\Projects\eShop\eShop.Api\obj\Debug\net10.0\refint\eShop.Api.dll
 C:\Projects\eShop\eShop.Api\obj\Debug\net10.0\eShop.Api.pdb
 C:\Projects\eShop\eShop.Api\obj\Debug\net10.0\eShop.Api.genruntimeconfig.cache
 C:\Projects\eShop\eShop.Api\obj\Debug\net10.0\ref\eShop.Api.dll
+C:\Projects\eShop\eShop.Api\obj\Debug\net10.0\eShop.Api.sourcelink.json

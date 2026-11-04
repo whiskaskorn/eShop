@@ -14,11 +14,8 @@ public static class UserEndpoints
         var authGroup = app.MapGroup("/users");
 
 
-        userGroup.MapGet("/", UserServices.GetAll);
-        userGroup.MapGet("/{id}", async (int id) =>
-        {
-            return Results.Ok();
-        });
+        userGroup.MapGet("/", UserServices.GetAll).AllowAnonymous();
+        userGroup.MapGet("/me", UserServices.GetOne);
         authGroup.MapPost("/registration", UserServices.Registration);
         authGroup.MapPost("/login", UserServices.Login);
         userGroup.MapPut("/me", UserServices.Put);

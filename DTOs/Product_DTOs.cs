@@ -7,3 +7,11 @@ public class PostProductDTO
     public decimal Price { get; set; }
     public bool isActive { get; set; } = true;
 }
+
+public class PutProductDTO
+{
+    public string? Name { get; set; }
+    public string? Decription { get; set; }
+    public decimal Price { get; set; }
+    public bool isActive { get; set; } = true;
+}

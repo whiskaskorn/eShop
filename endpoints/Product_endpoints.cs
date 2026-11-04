@@ -12,10 +12,10 @@ public class ProductEndpoints
 {
     public static void MapProductEndpoints(WebApplication app)
     {
-        var productsGroup = app.MapGroup("/products");
-        productsGroup.MapGet("/",ProductServices.GetAll);
-        productsGroup.MapPost("/", ProductServices.AddProduct).RequireAuthorization();
-        // productsGroup.MapPut("/",ProductServices.PutProduct);
-        productsGroup.MapDelete("/{id}",ProductServices.DeleteProduct).RequireAuthorization();
+        var productsGroup = app.MapGroup("/products").RequireAuthorization();
+        productsGroup.MapGet("/",ProductServices.GetAll).AllowAnonymous();
+        productsGroup.MapPost("/", ProductServices.AddProduct);
+        productsGroup.MapPut("/{id}",ProductServices.PutProduct);
+        productsGroup.MapDelete("/{id}",ProductServices.DeleteProduct);
     }
 }
