@@ -18,7 +18,7 @@ builder.Services.AddScoped<JwtServices>();
 builder.Services.AddAuth(builder.Configuration);
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
-builder.Services.AddDbContext<UserContext>(o => o.UseNpgsql("Host=localhost; Port=5432; Database=eShop; Username=postgres; Password=whiskas0212"));
+builder.Services.AddDbContext<UserContext>(o => o.UseNpgsql(builder.Configuration["ConnectionStringPostGre"]));
 
 var app = builder.Build();
 

@@ -55,13 +55,20 @@ public class ProductServices
             return Results.Created();
     }
 
-    public static async Task<IResult> PutProduct(int id, PutProductDTO dto, UserContext db, ClaimsPrincipal currentUser)
+    public static async Task<IResult> PutProduct(int id, PutProductDTO dto, IValidator<PutProductDTO> validator,UserContext db, ClaimsPrincipal currentUser)
     {
         var product = await db.Products.FindAsync(id);
         if(product == null)
         {
             return Results.NotFound("Товар не знайден!");
         }
+
+        var validationResult = validator.Validate(dto);
+        if (!validationResult.IsValid)
+        {
+            return Results.ValidationProblem(validationResult.ToDictionary());
+        }
+        
         var idUserFromTokenString = currentUser.FindFirst("Id")?.Value;
         if (idUserFromTokenString == null)
         {

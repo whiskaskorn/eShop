@@ -8,6 +8,11 @@ namespace JwtService;
 
 public class JwtServices
 {
+    string _key;
+    public JwtServices(IConfiguration configuration)
+    {
+        _key = configuration.GetValue<string>("JwtSecretKey") ?? throw new InvalidOperationException("Не задано JwtSecretKey");
+    }
     public string GenerateJwtToken(User user)
     {
         var claims = new List<Claim>
@@ -20,7 +25,7 @@ public class JwtServices
         var token = new JwtSecurityToken(
         expires: DateTime.UtcNow.AddHours(1),
         claims: claims,
-        signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SECRET_KEY_TESTSECRET_KEY_TESTSECRET_KEY_TESTSECRET_KEY_TESTSECRET_KEY_TEST")),
+        signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_key)),
         SecurityAlgorithms.HmacSha256)
         );
         return new JwtSecurityTokenHandler().WriteToken(token);
