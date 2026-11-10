@@ -20,5 +20,6 @@ public static class UserEndpoints
         authGroup.MapPost("/login", UserServices.Login);
         userGroup.MapPut("/me", UserServices.Put);
         userGroup.MapDelete("/me", UserServices.Delete);
+        userGroup.MapPost("/confirmEmail",UserServices.ConfirmEmail).AllowAnonymous();
     }
 }

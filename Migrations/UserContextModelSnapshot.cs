@@ -59,6 +59,9 @@ namespace eShop.Api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("Code")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
@@ -70,6 +73,9 @@ namespace eShop.Api.Migrations
 
                     b.Property<string>("Username")
                         .HasColumnType("text");
+
+                    b.Property<bool>("isConfirmEmail")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 

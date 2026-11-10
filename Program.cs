@@ -1,3 +1,4 @@
+using MailKit.Net.Smtp;
 using System.Text;
 using AppDbContext;
 using AuthService;
@@ -20,7 +21,6 @@ builder.Services.AddAuth(builder.Configuration);
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
 builder.Services.AddDbContext<UserContext>(o => o.UseNpgsql(builder.Configuration["ConnectionStrings:ConnectionPostGre"]));
-
 var app = builder.Build();
 
 app.UseAuthentication();

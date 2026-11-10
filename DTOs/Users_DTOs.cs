@@ -12,6 +12,11 @@ public class RegistrationUserDTO
     public string? Email { get; set; }
     public string? Password { get; set; }
 }
+public class ConfirmEmailDTO
+{
+    public string? Email { get; set; }
+    public int Code { get; set; }
+}
 
 public class LoginUserDTO
 {
