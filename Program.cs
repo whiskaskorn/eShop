@@ -10,6 +10,7 @@ using PasswordHasher;
 using Product_DTOs;
 using Users_DTOs;
 
+Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development");
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
@@ -18,7 +19,7 @@ builder.Services.AddScoped<JwtServices>();
 builder.Services.AddAuth(builder.Configuration);
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
-builder.Services.AddDbContext<UserContext>(o => o.UseNpgsql(builder.Configuration["ConnectionStringPostGre"]));
+builder.Services.AddDbContext<UserContext>(o => o.UseNpgsql(builder.Configuration["ConnectionStrings:ConnectionPostGre"]));
 
 var app = builder.Build();
 

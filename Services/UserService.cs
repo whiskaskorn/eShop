@@ -6,11 +6,12 @@ using PasswordHasher;
 using Microsoft.EntityFrameworkCore;
 using JwtService;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
 
 namespace UserService;
 
 public static class UserServices
-{
+{   
     public static async Task<IResult> GetAll(UserContext db)
     {
         var users = await db.Users.ToListAsync();
@@ -39,7 +40,7 @@ public static class UserServices
         return Results.Ok(dto);
     }
 
-    public static async Task<IResult> Registration(RegistrationUserDTO dto, IValidator<RegistrationUserDTO> validator, UserContext db,Password_Hasher _hasher)
+    public static async Task<IResult> Registration(RegistrationUserDTO dto, [FromServices] IValidator<RegistrationUserDTO> validator, UserContext db,Password_Hasher _hasher)
     {
         var validationResult = validator.Validate(dto);
         if (!validationResult.IsValid)
@@ -65,7 +66,7 @@ public static class UserServices
         return Results.Created();
     }
 
-    public static async Task<IResult> Login(LoginUserDTO dto, IValidator<LoginUserDTO> validator,UserContext db, Password_Hasher hasher,JwtServices jwt)
+    public static async Task<IResult> Login(LoginUserDTO dto,[FromServices] IValidator<LoginUserDTO> validator,UserContext db, Password_Hasher hasher,JwtServices jwt)
     {
         var validationResult = validator.Validate(dto);
         if (!validationResult.IsValid)
@@ -88,7 +89,7 @@ public static class UserServices
         var token = jwt.GenerateJwtToken(user);
         return Results.Ok(token);
     }
-    public static async Task<IResult> Put(PutUserDTO dto, IValidator<PutUserDTO> validator,UserContext db, ClaimsPrincipal currentUser, Password_Hasher hasher)
+    public static async Task<IResult> Put(PutUserDTO dto,[FromServices] IValidator<PutUserDTO> validator,UserContext db, ClaimsPrincipal currentUser, Password_Hasher hasher)
     {
         var validationResult = validator.Validate(dto);
         if (!validationResult.IsValid)
@@ -121,7 +122,7 @@ public static class UserServices
         {
             return Results.Conflict("Користувач з таким іменем або поштой вже існує!");
         }
-
+        
         user.Username = dto.Username;
         user.Email = dto.Email;
         user.HashPassword = hasher.Generate(dto.NewPassword!);

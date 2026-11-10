@@ -16,7 +16,7 @@ public static class AuthServices
                 ValidateAudience = false,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SECRET_KEY_TESTSECRET_KEY_TESTSECRET_KEY_TESTSECRET_KEY_TESTSECRET_KEY_TEST"))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("ApiKey:JwtSecretKey")!))
             };
         });
         return serviceCollection;

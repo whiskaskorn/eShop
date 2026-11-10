@@ -65,6 +65,9 @@ namespace eShop.Api.Migrations
                     b.Property<string>("HashPassword")
                         .HasColumnType("text");
 
+                    b.Property<string>("Roles")
+                        .HasColumnType("text");
+
                     b.Property<string>("Username")
                         .HasColumnType("text");
 

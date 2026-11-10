@@ -11,7 +11,7 @@ public class JwtServices
     string _key;
     public JwtServices(IConfiguration configuration)
     {
-        _key = configuration.GetValue<string>("JwtSecretKey") ?? throw new InvalidOperationException("Не задано JwtSecretKey");
+        _key = configuration.GetValue<string>("ApiKey:JwtSecretKey") ?? throw new InvalidOperationException("Не задано JwtSecretKey");
     }
     public string GenerateJwtToken(User user)
     {
@@ -20,6 +20,7 @@ public class JwtServices
             new Claim("Id", Convert.ToString(user.Id)),
             new Claim("Username", user.Username!),
             new Claim("Email", user.Email!),
+            new Claim(ClaimTypes.Role, user.Roles!)
         };
 
         var token = new JwtSecurityToken(

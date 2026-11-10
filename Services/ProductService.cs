@@ -4,6 +4,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using models;
 using Product_DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ProductService;
 
@@ -18,7 +19,7 @@ public class ProductServices
         }
         return Results.Ok(products);
     }
-    public static async Task<IResult> AddProduct(PostProductDTO dto, IValidator<PostProductDTO> validator,UserContext db, ClaimsPrincipal currentUser)
+    public static async Task<IResult> AddProduct(PostProductDTO dto,[FromServices] IValidator<PostProductDTO> validator,UserContext db, ClaimsPrincipal currentUser)
     {
         var validationResult = validator.Validate(dto);
             if (!validationResult.IsValid)
@@ -55,7 +56,7 @@ public class ProductServices
             return Results.Created();
     }
 
-    public static async Task<IResult> PutProduct(int id, PutProductDTO dto, IValidator<PutProductDTO> validator,UserContext db, ClaimsPrincipal currentUser)
+    public static async Task<IResult> PutProduct(int id, PutProductDTO dto, [FromServices] IValidator<PutProductDTO> validator,UserContext db, ClaimsPrincipal currentUser)
     {
         var product = await db.Products.FindAsync(id);
         if(product == null)
@@ -75,7 +76,7 @@ public class ProductServices
             return Results.Forbid();
         }
         int idUserFromTokenInt = Convert.ToInt32(idUserFromTokenString);
-        if(product.UserId != idUserFromTokenInt)
+        if(product.UserId != idUserFromTokenInt && !currentUser.IsInRole("Admin"))
         {
             return Results.BadRequest("Ви можете змінити лише свій товар!");
         }
@@ -103,7 +104,7 @@ public class ProductServices
         }
         int idUserFromTokenInt = Convert.ToInt32(idUserFromTokenString);
 
-        if(product.UserId != idUserFromTokenInt)
+        if(product.UserId != idUserFromTokenInt && !currentUser.IsInRole("Admin"))
         {
             return Results.BadRequest("Ви можете видалити лише свій товар!");
         }
