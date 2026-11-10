@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5f6f2"><meta name="description" content="eShop — пространство хороших находок. Каталог товаров и ваши объявления.">
+<title>eShop — хорошие вещи рядом</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%231b2925'/%3E%3Ctext x='16' y='47' font-size='48' fill='%23d9f792'%3Ee%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css"><script type="module" src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#catalog">Перейти к каталогу</a>
+<div class="topline"><span>Место для вещей с продолжением</span><span>Найди своё. Поделись своим. ↗</span></div>
+<header class="header wrap">
+<a class="brand" href="#" aria-label="eShop — главная">e<span>Shop</span><i></i></a>
+<nav aria-label="Основное меню"><a href="#catalog" class="nav-active">Каталог</a><button id="favorites-nav">Избранное <span id="favorites-count">0</span></button><button id="mine-nav">Мои товары</button></nav>
+<button class="button dark" id="account-button">Войти <span aria-hidden="true">↗</span></button>
+</header>
+<main class="wrap">
+<div id="demo-banner" class="demo-banner" hidden>Демонстрация интерфейса · Примерные товары, изменения сохраняются только до обновления страницы.</div>
+<section class="hero" aria-labelledby="hero-title">
+<div class="hero-copy"><div class="eyebrow"><span class="dot"></span> ХОРОШИЕ ВЕЩИ. НОВЫЕ ИСТОРИИ.</div><h1 id="hero-title">Найди то,<br>что <em>тебе близко.</em></h1><p>Для дома, работы и маленьких радостей.<br>Открывай каталог — или добавляй своё.</p><a class="button dark" href="#catalog">Смотреть каталог <span>↗</span></a><div class="hero-caption"><span class="mini-mark">e.</span> У каждой вещи есть продолжение.</div></div>
+<div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><span class="art-label">EVERYDAY<br>ESSENTIALS / 01</span><svg class="chair" viewBox="0 0 500 500"><defs><linearGradient id="seat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e4a55d"/><stop offset="1" stop-color="#92532d"/></linearGradient><linearGradient id="back" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#edbc82"/><stop offset="1" stop-color="#bc783f"/></linearGradient><filter id="shadow"><feGaussianBlur stdDeviation="12"/></filter></defs><ellipse cx="265" cy="440" rx="155" ry="23" fill="#172c24" opacity=".15" filter="url(#shadow)"/><path d="M151 302 128 436M330 299 359 438M221 326 215 454M392 271 415 409" fill="none" stroke="#323c34" stroke-width="17" stroke-linecap="round"/><path d="M148 145 Q148 114 185 104 L344 71 Q377 65 385 96 L411 231 Q415 254 384 264 L219 304 Q191 311 183 282Z" fill="url(#back)" stroke="#bb7f49" stroke-width="3"/><path d="M123 288 300 244 Q321 240 342 250 L407 283 Q425 296 402 307 L228 358 Q205 365 188 352 L123 313 Q106 302 123 288Z" fill="url(#seat)"/><path d="M124 309 192 350 Q212 361 234 354 L402 306" fill="none" stroke="#774825" stroke-width="5"/><path d="M177 141 354 99M182 162 359 120M187 183 364 141M192 204 369 162M197 225 374 183M202 246 379 204M207 267 384 225" stroke="#8f592e" opacity=".16" fill="none" stroke-width="2"/></svg><span class="floating-label"><span class="dot"></span> Вещи, которые остаются</span><div class="art-bottom"><span>МЕНЬШЕ ЛИШНЕГО.<br>БОЛЬШЕ ТВОЕГО.</span><span class="round-arrow">↗</span></div></div>
+</section>
+<section class="catalog" id="catalog" aria-labelledby="catalog-title">
+<div class="section-head"><div><span class="eyebrow muted">ТВОЯ СЛЕДУЮЩАЯ НАХОДКА</span><h2 id="catalog-title">Каталог <span id="total-count">—</span></h2></div><button id="add-product" class="button outline">＋ Добавить товар</button></div>
+<div class="toolbar"><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Что ты ищешь?" aria-label="Поиск по названию и описанию"><kbd>/</kbd></label><label class="sort"><span>Сортировка</span><select id="sort" aria-label="Сортировка товаров"><option value="new">Сначала новые</option><option value="price-asc">Сначала дешевле</option><option value="price-desc">Сначала дороже</option><option value="name">По названию</option></select></label></div>
+<div class="catalog-layout"><aside class="filters"><div class="filter-heading">Показать <button id="reset-filters" class="text-button">Сбросить</button></div><div class="filter-tabs"><button data-view="all" class="selected">Все товары <span>↗</span></button><button data-view="favorites">Избранное <span>♡</span></button><button data-view="mine">Мои товары <span>↗</span></button></div><div class="filter-block"><p>Цена</p><div class="price-range"><input id="min-price" type="number" min="0" step="any" placeholder="От" aria-label="Минимальная цена"><span>—</span><input id="max-price" type="number" min="0" step="any" placeholder="До" aria-label="Максимальная цена"></div></div><label class="check"><input id="active-only" type="checkbox" checked><span>Только доступные</span></label><div class="seller-note"><span class="note-star">✳</span><h3>Твоим вещам<br>здесь место.</h3><p>Добавь товар и дай ему новую историю.</p><button id="sell-note" class="text-button">Создать объявление ↗</button></div></aside><div class="results"><div class="results-meta"><span id="result-count" aria-live="polite">Загружаем каталог…</span><span class="view-label">▦ &nbsp; Сетка</span></div><div id="products" class="product-grid" aria-live="polite"></div></div></div>
+</section>
+<section class="bottom-banner"><div><span class="eyebrow">МЕСТО ДЛЯ ТВОИХ ИДЕЙ</span><h2>Хорошие вещи<br>не должны лежать без дела.</h2></div><button id="bottom-sell" class="button dark">Добавить свой товар ↗</button></section>
+</main>
+<footer class="wrap footer"><a href="#" class="brand">e<span>Shop</span><i></i></a><span>Хорошие вещи. Новые истории.</span><a href="#catalog">Вернуться к каталогу ↑</a></footer>
+<dialog id="modal" aria-labelledby="modal-title"><div class="modal-top"><span class="eyebrow">ESHOP / ЛИЧНОЕ</span><button id="close-modal" class="icon-button" aria-label="Закрыть">×</button></div><div id="modal-content"></div></dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+</body></html>

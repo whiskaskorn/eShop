@@ -23,6 +23,10 @@ builder.Services.AddDbContext<UserContext>(o => o.UseNpgsql(builder.Configuratio
 
 var app = builder.Build();
 
+// Serve the frontend from wwwroot on the same origin as the API.
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
